@@ -1,1 +1,28 @@
-!function(e,t){"use strict";var o=[];if("function"==typeof define&&define.amd)define(o,function(){return t.apply(e,[].slice.call(arguments))});else if("object"==typeof module&&module.exports){for(var n=o.length;n--;)o[n]=require(o[n]);module.exports=t.apply(e,o)}}("object"==typeof global&&global||"object"==typeof window&&window||this,function(){"use strict";return function(){}});
+(function (context) {
+/*jscs:disable validateIndentation*//*jscs:enable validateIndentation*/
+// -----------------------------------------------------------------------------
+
+'use strict';
+
+var id = '';
+var dependencies = [];
+
+function factory() {
+  return function () {};
+}
+
+// -----------------------------------------------------------------------------
+var x = dependencies.length; var o = 'object';
+context = typeof global === o ? global : typeof window === o ? window : context;
+if (typeof define === 'function' && define.amd) {
+  define(dependencies, function () {
+    return factory.apply(context, [].slice.call(arguments));
+  });
+} else if (typeof module === o && module.exports) {
+  for (; x--;) {dependencies[x] = require(dependencies[x]);}
+  module.exports = factory.apply(context, dependencies);
+} else {
+  for (; x--;) {dependencies[x] = context[dependencies[x]];}
+  context[id] = factory.apply(context, dependencies);
+}
+}(this));
